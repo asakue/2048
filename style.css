@@ -1,296 +1,167 @@
+/* Base styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #faf8ef, #f0e4d7);
-    margin: 0;
-    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
     color: #776e65;
-    transition: all 0.5s ease;
+    transition: background 0.5s ease;
+    -webkit-tap-highlight-color: transparent;
 }
 
-/* Темная тема */
+/* Dark theme */
 body.dark-theme {
     background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
-    color: #ffffff;
+    color: #fff;
 }
 
-.dark-theme .board {
-    background: rgba(68, 68, 68, 0.8);
+.dark-theme .board,
+.dark-theme .score-container {
+    background: rgba(0, 0, 0, 0.3);
 }
 
 .dark-theme .tile {
-    background: rgba(85, 85, 85, 0.9);
-    color: #ffffff;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-/* Контейнер игры */
-.container {
-    text-align: center;
-    max-width: 90vw;
-    margin: 20px;
-    padding: 30px;
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
 }
 
-/* Заголовок с анимацией */
+/* Game container */
+.container {
+    width: 100%;
+    max-width: 500px;
+    padding: 15px;
+    margin: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
 .animated-title {
-    font-size: 80px;
-    margin-bottom: 20px;
+    font-size: 3.5rem;
+    margin: 15px 0;
     background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    animation: titlePulse 2s infinite;
 }
 
-@keyframes titlePulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-/* Адаптивность заголовка */
-@media (max-width: 600px) {
-    .animated-title {
-        font-size: 60px;
-    }
-}
-
-@media (max-width: 400px) {
-    .animated-title {
-        font-size: 40px;
-    }
-}
-
-/* Контейнер счета */
+/* Score board */
 .score-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto 20px;
     gap: 15px;
+    margin: 0 auto 20px;
+    padding: 12px;
+    border-radius: 12px;
     background: rgba(187, 173, 160, 0.8);
-    padding: 15px;
-    border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-.score, .best-score {
+.score,
+.best-score {
     flex: 1;
-    font-size: 25px;
-    font-weight: bold;
-    color: #faf8ef;
+    padding: 12px;
+    border-radius: 8px;
     background: rgba(143, 122, 102, 0.9);
-    padding: 15px;
-    border-radius: 12px;
-    text-align: center;
-    transition: transform 0.3s ease;
+    font-size: 1.3rem;
+    color: #fff;
 }
 
 .score-label {
-    font-size: 14px;
-    text-transform: uppercase;
-    margin-bottom: 5px;
-    letter-spacing: 1px;
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
 }
 
-.score.updated, .best-score.updated {
-    animation: scoreUpdate 0.5s ease-in-out;
-}
-
-@keyframes scoreUpdate {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-}
-
-/* Игровое поле */
+/* Game board */
 .board {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 12px;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 12px;
     background: rgba(187, 173, 160, 0.8);
-    padding: 15px;
-    border-radius: 15px;
-    max-width: 400px;
-    margin: auto;
     position: relative;
-    transform-style: preserve-3d;
-    perspective: 1000px;
+    touch-action: manipulation;
 }
 
-/* Плитки */
 .tile {
     aspect-ratio: 1;
-    background: rgba(205, 193, 180, 0.9);
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: 35px;
-    font-weight: bold;
-    color: #776e65;
-    border-radius: 12px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
-    transform: translateZ(0);
+    justify-content: center;
+    font-size: 1.8rem;
+    border-radius: 8px;
+    background: rgba(205, 193, 180, 0.9);
+    transition: transform 0.15s ease;
 }
 
-.tile.new-tile {
-    animation: appear 0.4s ease-out;
-}
+/* Tile colors */
+.tile[data-value="2"] { background: #eee4da; }
+.tile[data-value="4"] { background: #ede0c8; }
+.tile[data-value="8"] { background: #f2b179; color: #fff; }
+.tile[data-value="16"] { background: #f59563; color: #fff; }
+.tile[data-value="32"] { background: #f67c5f; color: #fff; }
+.tile[data-value="64"] { background: #f65e3b; color: #fff; }
+.tile[data-value="128"] { background: #edcf72; color: #fff; }
+.tile[data-value="256"] { background: #edcc61; color: #fff; }
+.tile[data-value="512"] { background: #edc850; color: #fff; }
+.tile[data-value="1024"] { background: #edc53f; color: #fff; }
+.tile[data-value="2048"] { background: #edc22e; color: #fff; }
 
-.tile.merged {
-    animation: merge 0.4s ease-out;
-}
-
-@keyframes appear {
-    0% { 
-        transform: scale(0) translateZ(20px);
-        opacity: 0;
-    }
-    100% { 
-        transform: scale(1) translateZ(0);
-        opacity: 1;
-    }
-}
-
-@keyframes merge {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2) translateZ(20px); }
-    100% { transform: scale(1); }
-}
-
-/* Цвета плиток с градиентами */
-.tile[data-value="2"] { background: linear-gradient(135deg, #eee4da, #ede0c8); }
-.tile[data-value="4"] { background: linear-gradient(135deg, #ede0c8, #f2b179); }
-.tile[data-value="8"] { background: linear-gradient(135deg, #f2b179, #f59563); color: #f9f6f2; }
-.tile[data-value="16"] { background: linear-gradient(135deg, #f59563, #f67c5f); color: #f9f6f2; }
-.tile[data-value="32"] { background: linear-gradient(135deg, #f67c5f, #f65e3b); color: #f9f6f2; }
-.tile[data-value="64"] { background: linear-gradient(135deg, #f65e3b, #edcf72); color: #f9f6f2; }
-.tile[data-value="128"] { background: linear-gradient(135deg, #edcf72, #edcc61); color: #f9f6f2; }
-.tile[data-value="256"] { background: linear-gradient(135deg, #edcc61, #edc850); color: #f9f6f2; }
-.tile[data-value="512"] { background: linear-gradient(135deg, #edc850, #edc53f); color: #f9f6f2; }
-.tile[data-value="1024"] { background: linear-gradient(135deg, #edc53f, #edc22e); color: #f9f6f2; }
-.tile[data-value="2048"] { background: linear-gradient(135deg, #edc22e, #3c3a32); color: #f9f6f2; }
-
-/* Кнопки управления */
+/* Buttons */
 .button-container {
     display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin: 20px 0;
+    gap: 10px;
+    margin: 15px 0;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 button {
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    padding: 12px 25px;
+    flex: 1 1 120px;
+    padding: 12px;
     border: none;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #8f7a66, #776e65);
-    color: #faf8ef;
+    border-radius: 8px;
+    background: #8f7a66;
+    color: #fff;
+    font-size: 0.9rem;
     cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    min-width: 120px;
+    transition: transform 0.1s;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-}
-
-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    gap: 6px;
+    min-height: 44px;
 }
 
 button:active {
-    transform: translateY(0);
+    transform: scale(0.98);
 }
 
-button i {
-    font-size: 14px;
-}
-
-/* Индикатор свайпов */
-.swipe-indicator {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-}
-
-.board:empty .swipe-indicator {
-    opacity: 1;
-}
-
-.swipe-text {
-    font-size: 14px;
-    margin-bottom: 10px;
-    color: rgba(119, 110, 101, 0.8);
-}
-
-.swipe-arrows {
-    animation: bounce 1s infinite;
-}
-
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-/* Подвал */
+/* Footer */
 footer {
-    margin-top: 30px;
-    padding: 15px;
-    font-size: 16px;
+    margin-top: 20px;
+    padding: 12px;
+    font-size: 0.85rem;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    align-items: center;
-}
-
-footer a {
-    color: #8f7a66;
-    text-decoration: none;
-    transition: color 0.3s;
-    display: flex;
-    align-items: center;
     gap: 8px;
-}
-
-footer a:hover {
-    color: #bcada1;
+    align-items: center;
 }
 
 .game-controls {
     display: flex;
-    gap: 20px;
+    gap: 15px;
     margin-top: 10px;
-    font-size: 14px;
-    color: rgba(119, 110, 101, 0.8);
 }
 
 .control-hint {
@@ -299,98 +170,77 @@ footer a:hover {
     gap: 5px;
 }
 
-/* Медиа-запросы для адаптивности */
-@media (max-width: 600px) {
+/* Mobile optimizations */
+@media (max-width: 500px) {
     .container {
-        padding: 15px;
-        margin: 10px;
-    }
-
-    .board {
+        margin: 5px;
         padding: 10px;
     }
 
-    .tile {
-        font-size: 24px;
-    }
-
-    button {
-        padding: 10px 20px;
-        min-width: 100px;
-        font-size: 14px;
+    .animated-title {
+        font-size: 2.8rem;
+        margin: 10px 0;
     }
 
     .score-container {
-        flex-direction: column;
         gap: 10px;
-    }
-
-    .score, .best-score {
-        width: 100%;
         padding: 10px;
     }
-}
 
-/* Эффект стекла */
-.glass-effect {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
+    .score,
+    .best-score {
+        font-size: 1.1rem;
+        padding: 10px;
+    }
 
-/* Анимация для кнопок */
-.glow-effect {
-    position: relative;
-    overflow: hidden;
-}
-
-.glow-effect::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-        45deg,
-        transparent,
-        rgba(255, 255, 255, 0.1),
-        transparent
-    );
-    transform: rotate(45deg);
-    animation: glowEffect 3s infinite;
-}
-
-@keyframes glowEffect {
-    0% { transform: rotate(45deg) translateX(-100%); }
-    100% { transform: rotate(45deg) translateX(100%); }
-}
-
-/* Адаптивные размеры плиток */
-@media (max-width: 400px) {
     .tile {
-        font-size: 20px;
+        font-size: 1.5rem;
+    }
+
+    button {
+        font-size: 0.8rem;
+        padding: 10px;
+    }
+
+    footer {
+        font-size: 0.8rem;
     }
 }
 
-/* Темная тема - дополнительные стили */
-.dark-theme .glass-effect {
-    background: rgba(0, 0, 0, 0.2);
+@media (max-width: 380px) {
+    .animated-title {
+        font-size: 2.2rem;
+    }
+
+    .tile {
+        font-size: 1.2rem;
+    }
+
+    .button-container {
+        gap: 8px;
+    }
+
+    button {
+        min-height: 40px;
+    }
 }
 
-.dark-theme button {
-    background: linear-gradient(135deg,#4a4a4a, #2d2d2d);
+/* Animations */
+@keyframes tileAppear {
+    0% { transform: scale(0); }
+    90% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }
 
-.dark-theme .score-container {
-    background: rgba(0, 0, 0, 0.3);
+.new-tile {
+    animation: tileAppear 0.2s ease-out;
 }
 
-.dark-theme footer a {
-    color: #bcada1;
+.swipe-indicator {
+    animation: pulse 1.5s infinite;
 }
 
-.dark-theme .swipe-text,
-.dark-theme .control-hint {
-    color: rgba(255, 255, 255, 0.8);
+@keyframes pulse {
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.95); }
 }

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>2048 Deluxe</title>
+    <!-- Подключение стилей -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="additional-styles.css">
+    <!-- Подключение шрифтов и иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Основной контейнер игры -->
+    <div class="container">
+        <!-- Заголовок -->
+        <header>
+            <h1 class="animated-title">2048</h1>
+        </header>
+
+        <!-- Блок счета -->
+        <div class="score-container glass-effect">
+            <div class="score" id="score">
+                <div class="score-label">СЧЕТ</div>
+                <span>0</span>
+            </div>
+            <div class="best-score" id="best-score">
+                <div class="score-label">РЕКОРД</div>
+                <span>0</span>
+            </div>
+        </div>
+
+        <!-- Блок кнопок управления -->
+        <div class="button-container">
+            <button id="reset" class="glow-effect" aria-label="Сброс игры">
+                <i class="fas fa-redo-alt"></i> Сброс
+            </button>
+            <button id="undo" class="glow-effect" aria-label="Отменить ход">
+                <i class="fas fa-undo"></i> Назад
+            </button>
+            <button id="theme-toggle" class="glow-effect" aria-label="Сменить тему">
+                <i class="fas fa-moon"></i> Тема
+            </button>
+        </div>
+
+        <!-- Игровое поле -->
+        <main>
+            <div id="board" class="board glass-effect" role="grid">
+                <!-- Индикатор свайпа -->
+                <div class="swipe-indicator">
+                    <div class="swipe-text">Свайпайте для игры</div>
+                    <div class="swipe-arrows">
+                        <i class="fas fa-arrows-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Подвал -->
+        <footer class="glass-effect">
+            <!-- Ссылка на GitHub автора -->
+            <a href="https://github.com/asakue" target="_blank" rel="noopener noreferrer" aria-label="GitHub автора">
+                <i class="fab fa-github"></i> by asakue
+            </a>
+            <!-- Подсказки по управлению -->
+            <div class="game-controls">
+                <div class="control-hint">
+                    <i class="fas fa-arrows-alt"></i> Используйте стрелки
+                </div>
+                <div class="control-hint">
+                    <i class="fas fa-hand-pointer"></i> или свайпы
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Подключение скриптов -->
+    <script src="game/board.js"></script>
+    <script src="game/score.js"></script>
+    <script src="game/tile.js"></script>
+    <script src="game/controls.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

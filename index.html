@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2048</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>2048</h1>
+        </header>
+        <div class="score-container">
+            <div class="score" id="score"><span>0</span></div>
+            <div class="best-score" id="best-score"> <span>0</span></div>
+        </div>
+        <div class="button-container">
+            <button id="reset" aria-label="Сброс игры">Сброс</button>
+            <button id="undo" aria-label="Отменить последний ход">Назад</button>
+            <button id="theme-toggle" aria-label="Сменить тему">Тема</button>
+        </div>
+        <main>
+            <div id="board" class="board" role="grid">
+            </div>
+        </main>
+        <footer>
+            <a href="https://github.com/asakue" target="_blank" aria-label="Ссылка на GitHub автора">
+                <i class="fab fa-github"></i> by asakue
+            </a>
+        </footer>
+    </div>
+    <script src="game/board.js"></script>
+    <script src="game/score.js"></script>
+    <script src="game/tile.js"></script>
+    <script src="game/controls.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
+

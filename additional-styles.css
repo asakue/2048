@@ -1,0 +1,488 @@
+/* Стили для оверлея "Game Over" */
+.game-over-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: overlay-fade 0.4s ease-in;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+@keyframes overlay-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.game-over-message {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2.5rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    max-width: 90%;
+    margin: 0 auto;
+    animation: message-pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transform: translateZ(0);
+}
+
+.dark-theme .game-over-message {
+    background: rgba(40, 44, 64, 0.95);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+@keyframes message-pop {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.game-over-message h2 {
+    color: #ff6b6b;
+    margin-bottom: 1.5rem;
+    font-size: 2.2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-weight: 700;
+}
+
+.dark-theme .game-over-message h2 {
+    color: #ff8c8c;
+}
+
+.game-over-message p {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.game-over-message button {
+    margin-top: 1.5rem;
+    background: linear-gradient(to right, #4ecdc4, #2cb5aa);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.game-over-message button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: 0.5s;
+}
+
+.game-over-message button:hover::before {
+    left: 100%;
+}
+
+.game-over-message button:hover {
+    background: linear-gradient(to right, #3dbbaa, #1ea89d);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.5);
+}
+
+.game-over-message button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(78, 205, 196, 0.4);
+}
+
+/* Анимация слияния плиток */
+@keyframes mergeScale {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); filter: brightness(1.2); }
+    100% { transform: scale(1); }
+}
+
+.tile.merged {
+    animation: mergeScale 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 10;
+}
+
+/* Удалены стили индикатора свайпа */
+
+/* Состояния кнопок */
+button:hover {
+    opacity: 0.9;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Дополнительная мобильная адаптация */
+@media (max-width: 340px) {
+    .tile {
+        font-size: 1rem;
+        border-radius: 8px;
+    }
+
+    .animated-title {
+        font-size: 2rem;
+    }
+
+    button {
+        min-width: 90px;
+        padding: 8px;
+        font-size: 0.8rem;
+    }
+
+    .game-over-message {
+        padding: 1.5rem;
+    }
+
+    .game-over-message h2 {
+        font-size: 1.8rem;
+    }
+
+    .game-over-message p {
+        font-size: 1rem;
+    }
+
+    .game-over-message button {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Стили для истории ходов */
+.move-history {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 12px;
+    display: none;
+    font-size: 0.9rem;
+    max-width: 150px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.dark-theme .move-history {
+    background: rgba(40, 44, 64, 0.9);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Эффекты для стеклянного интерфейса */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.dark-theme .glass-effect {
+    background: rgba(40, 44, 64, 0.2);
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Particle effects for tile merges */
+.particle {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    opacity: 0.8;
+    animation: particle-fade 0.8s ease-out forwards;
+}
+
+@keyframes particle-fade {
+    0% { transform: scale(0.3); opacity: 0.8; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+/* Ripple effect for tiles */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple 0.8s linear;
+    background: rgba(255, 255, 255, 0.4);
+}
+
+@keyframes ripple {
+    to { transform: scale(2.5); opacity: 0; }
+}
+
+/* Стили для панели настроек */
+.settings-panel {
+    display: flex;
+    gap: 10px;
+    padding: 10px 15px;
+    border-radius: 12px;
+    margin: 15px 0;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.setting-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    min-height: auto;
+    transition: all 0.3s ease;
+    background: rgba(143, 122, 102, 0.9);
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.setting-button:hover {
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.setting-button.active {
+    background: linear-gradient(to right, #4ecdc4, #2cb5aa);
+}
+
+.setting-button.active::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #fff;
+    bottom: 5px;
+    right: 5px;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+}
+
+/* Селектор тем */
+.theme-selector-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.theme-button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    min-height: auto;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.theme-button[data-theme="light"] {
+    background: linear-gradient(135deg, #faf8ef, #f0e4d7);
+    color: #776e65;
+}
+
+.theme-button[data-theme="dark"] {
+    background: linear-gradient(135deg, #292e42, #1a1f35);
+    color: #eee;
+}
+
+.theme-button[data-theme="neon"] {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: #fff;
+}
+
+.theme-button[data-theme="pastel"] {
+    background: linear-gradient(135deg, #f5f7fa, #e6eef8);
+    color: #7986cb;
+}
+
+.theme-button:hover {
+    transform: translateY(-2px) scale(1.1);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.theme-button.active {
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #4ecdc4;
+}
+
+/* Анимация появления звука */
+@keyframes sound-wave {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.sound-wave {
+    animation: sound-wave 0.5s ease-in-out;
+}
+
+/* Анимация заднего фона */
+.animated-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Стили для плиток анимированного фона */
+.bg-tile {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform-origin: center;
+    user-select: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    opacity: 0.1;
+    filter: blur(1px);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #8f7a66;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #756354;
+}
+
+/* Win celebration effects */
+.confetti {
+    position: absolute;
+    width: 8px;
+    height: 16px;
+    opacity: 0;
+    pointer-events: none;
+    transform-origin: center;
+    animation: confetti-fall 2.5s linear forwards;
+}
+
+@keyframes confetti-fall {
+    0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+/* Стили для поздравительного сообщения */
+.celebration-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+    padding: 2.5rem;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 90%;
+    width: 400px;
+    margin: 0 auto;
+    z-index: 1000;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dark-theme .celebration-message {
+    background: rgba(40, 44, 64, 0.9);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.celebration-message h2 {
+    color: #f59563;
+    margin-bottom: 1.5rem;
+    font-size: 2.2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-weight: 700;
+}
+
+.celebration-message p {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.celebration-message button {
+    margin-top: 1.5rem;
+    background: linear-gradient(to right, #f59563, #e9853e);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(245, 149, 99, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.celebration-message button:hover {
+    background: linear-gradient(to right, #e9853e, #e67e28);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(245, 149, 99, 0.5);
+}
+
+@media (max-width: 340px) {
+    .celebration-message {
+        padding: 1.5rem;
+    }
+
+    .celebration-message h2 {
+        font-size: 1.8rem;
+    }
+
+    .celebration-message p {
+        font-size: 1rem;
+    }
+
+    .celebration-message button {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
